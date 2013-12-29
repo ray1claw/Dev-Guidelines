@@ -739,7 +739,7 @@ actually be necessary in vanilla CSS, e.g.
 Would be wholly unnecessary in normal CSS, so the following would be **bad**
 Sass:
 
-```css
+```scss
 .header {
   .site-nav {
     li {
