@@ -1,10 +1,15 @@
 # General CSS notes, advice and guidelines
 
-> The contents of this page have been shamelessly copied over from [CSS Wizardry Guidelines](https://github.com/csswizardry/CSS-Guidelines). It is intended that this document be revised and updated with learnings from various internal product development phases at [Srijan](http://www.srijan.net/)
+## References
 
-> The document is also to be expanded with a list several resources related to front-end development, such as various powerful/recommended grid systems, jQuery libraries, JS patterns, etc. that have proven useful on various projects.
+The contents of this page have been adapted from the following sources to suit 
+the specific needs of product development efforts at [Srijan](http://www.srijan.net/)
+* [CSS Wizardry Guidelines](https://github.com/csswizardry/CSS-Guidelines)
 
-In working on large, long running projects with dozens of developers, it is important that we all work in a unified way in order to, among other things:
+---
+
+In working on large, long running projects with dozens of developers, it is 
+important that we all work in a unified way in order to, among other things:
 
 * Keep stylesheets maintainable
 * Keep code transparent and readable
