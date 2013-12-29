@@ -1,7 +1,5 @@
 # General CSS notes, advice and guidelines
 
----
-
 > The contents of this page have been shamelessly copied over from [CSS Wizardry Guidelines](https://github.com/csswizardry/CSS-Guidelines). It is intended that this document be revised and updated with learnings from various internal product development phases at [Srijan](http://www.srijan.net/)
 
 > The document is also to be expanded with a list several resources related to front-end development, such as various powerful/recommended grid systems, jQuery libraries, JS patterns, etc. that have proven useful on various projects.
@@ -83,14 +81,16 @@ contents and our section titles. Read on for further explanation…
 At the top of stylesheets, I maintain a table of contents which will detail the
 sections contained in the document, for example:
 
-    /*------------------------------------*\
-        $CONTENTS
-    \*------------------------------------*/
-    /**
-     * CONTENTS............You’re reading it!
-     * RESET...............Set our reset defaults
-     * FONT-FACE...........Import brand font files
-     */
+```
+/*------------------------------------*\
+    $CONTENTS
+\*------------------------------------*/
+/**
+ * CONTENTS............You’re reading it!
+ * RESET...............Set our reset defaults
+ * FONT-FACE...........Import brand font files
+ */
+```
 
 This will tell the next developer(s) exactly what they can expect to find in
 this file. Each item in the table of contents maps directly to a section title.
@@ -104,9 +104,11 @@ table of contents will map to an include which pulls that section in.
 The table of contents would be of no use unless it had corresponding section
 titles. Denote a section thus:
 
-    /*------------------------------------*\
-        $RESET
-    \*------------------------------------*/
+```    
+/*------------------------------------*\
+    $RESET
+\*------------------------------------*/
+```
 
 The `$` prefixing the name of the section allows us to run a find ([Cmd|Ctrl]+F)
 for `$[SECTION-NAME]` and **limit our search scope to section titles only**.
@@ -114,20 +116,22 @@ for `$[SECTION-NAME]` and **limit our search scope to section titles only**.
 If you are working in one large stylesheet, you leave five (5) carriage returns
 between each section, thus:
 
-    /*------------------------------------*\
-        $RESET
-    \*------------------------------------*/
-    [Our
-    reset
-    styles]
+```
+/*------------------------------------*\
+    $RESET
+\*------------------------------------*/
+[Our
+reset
+styles]
 
 
 
 
 
-    /*------------------------------------*\
-        $FONT-FACE
-    \*------------------------------------*/
+/*------------------------------------*\
+    $FONT-FACE
+\*------------------------------------*/
+```
 
 This large chunk of whitespace is quickly noticeable when scrolling quickly
 through larger files.
@@ -158,16 +162,18 @@ For further reading I cannot recommend Jonathan Snook’s
 
 ## Anatomy of rulesets
 
-    [selector]{
-        [property]:[value];
-        [<- Declaration ->]
-    }
+```css
+[selector] {
+    [property]: [value];
+    [<- Declaration ->]
+}
+```
 
 I have a number of standards when structuring rulesets.
 
 * Use hyphen delimited class names (except for BEM notation,
   [see below](#naming-conventions))
-* 4 space indented
+* 2 space indented
 * Multi-line
 * Declarations in relevance (NOT alphabetical) order
 * Indent vendor prefixed declarations so that their values are aligned
@@ -176,23 +182,25 @@ I have a number of standards when structuring rulesets.
 
 A brief example:
 
-    .widget{
-        padding:10px;
-        border:1px solid #BADA55;
-        background-color:#C0FFEE;
-        -webkit-border-radius:4px;
-           -moz-border-radius:4px;
-                border-radius:4px;
-    }
-        .widget-heading{
-            font-size:1.5rem;
-            line-height:1;
-            font-weight:bold;
-            color:#BADA55;
-            margin-right:-10px;
-            margin-left: -10px;
-            padding:0.25em;
-        }
+```css
+.widget {
+    padding: 10px;
+    border: 1px solid #BADA55;
+    background-color: #C0FFEE;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+  .widget-heading {
+      font-size: 1.5rem;
+      line-height: 1;
+      font-weight: bold;
+      color: #BADA55;
+      margin-right: -10px;
+      margin-left: -10px;
+      padding: 0.25em;
+  }
+```
 
 Here we can see that `.widget-heading` must be a child of `.widget` as we have
 indented the `.widget-heading` ruleset one level deeper than `.widget`. This is
@@ -205,19 +213,21 @@ text rules, followed by everything else.
 
 One exception to our multi-line rule might be in cases of the following:
 
-    .t10    { width:10% }
-    .t20    { width:20% }
-    .t25    { width:25% }       /* 1/4 */
-    .t30    { width:30% }
-    .t33    { width:33.333% }   /* 1/3 */
-    .t40    { width:40% }
-    .t50    { width:50% }       /* 1/2 */
-    .t60    { width:60% }
-    .t66    { width:66.666% }   /* 2/3 */
-    .t70    { width:70% }
-    .t75    { width:75% }       /* 3/4*/
-    .t80    { width:80% }
-    .t90    { width:90% }
+```css
+.t10 { width: 10% }
+.t20 { width: 20% }
+.t25 { width: 25% }       /* 1/4 */
+.t30 { width: 30% }
+.t33 { width: 33.333% }   /* 1/3 */
+.t40 { width: 40% }
+.t50 { width: 50% }       /* 1/2 */
+.t60 { width: 60% }
+.t66 { width: 66.666% }   /* 2/3 */
+.t70 { width: 70% }
+.t75 { width: 75% }       /* 3/4*/
+.t80 { width: 80% }
+.t90 { width: 90% }
+```
 
 In this example (from [inuit.css’s table grid system](https://github.com/csswizardry/inuit.css/blob/master/inuit.css/partials/base/_tables.scss#L88))
 it makes more sense to single-line our CSS.
@@ -234,9 +244,11 @@ transparent and informative.
 
 The naming convention follows this pattern:
 
-    .block{}
-    .block__element{}
-    .block--modifier{}
+```css
+.block {}
+.block__element {}
+.block--modifier {}
+```
 
 * `.block` represents the higher level of an abstraction or component.
 * `.block__element` represents a descendent of `.block` that helps form `.block`
@@ -245,11 +257,13 @@ The naming convention follows this pattern:
 
 An **analogy** of how BEM classes work might be:
 
-    .person{}
-    .person--woman{}
-        .person__hand{}
-        .person__hand--left{}
-        .person__hand--right{}
+```css
+.person {}
+.person--woman {}
+  .person__hand {}
+  .person__hand--left {}
+  .person__hand--right {}
+```
 
 Here we can see that the basic object we’re describing is a person, and that a
 different type of person might be a woman. We can also see that people have
@@ -261,7 +275,7 @@ communicate what job the selector does; is it a sub-component (`__`) or a
 variation (`--`)?
 
 So, `.page-wrapper` is a standalone selector; it doesn’t form part of an
-abstraction or a component and as such it named correctly. `.widget-heading`,
+abstraction or a component and as such it is named correctly. `.widget-heading`,
 however, _is_ related to a component; it is a child of the `.widget` construct
 so we would rename this class `.widget__heading`.
 
@@ -282,7 +296,9 @@ classes; gzip will compress well written code _incredibly_ well.
 In a bid to make things easier to read, separate classes in your HTML with two
 (2) spaces, thus:
 
-    <div class="foo--bar  bar__baz">
+```html
+<div class="foo--bar  bar__baz">
+```
 
 This increased whitespace should hopefully allow for easier spotting and reading
 of multiple classes.
@@ -306,44 +322,35 @@ functionality.
 
 ### Internationalisation
 
-Despite being a British developer—and spending all my life writing <i>colour</i>
-instead of <i>color</i>—I feel that, for the sake of consistency, it is better
-to always use US-English in CSS. CSS, as with most (if not all) other languages,
-is written in US-English, so to mix syntax like `color:red;` with classes like
-`.colour-picker{}` lacks consistency. I have previously suggested and advocated
-writing bilingual classes, for example:
-
-    .color-picker,
-    .colour-picker{
-    }
-
-However, having recently worked on a very large Sass project where there were
-dozens of colour variables (e.g. `$brand-color`, `$highlight-color` etc.),
-maintaining two versions of each variable soon became tiresome. It also means
-twice as much work with things like find and replace.
+For the sake of consistency, it is better to always use US-English in CSS. 
+CSS, as with most (if not all) other languages, is written in US-English, so to
+mix syntax like `color:red;` with classes like
+`.colour-picker{}` lacks consistency.
 
 In the interests of consistency, always name classes and variables in the locale
 of the language you are working with.
 
 ## Comments
 
-I use a docBlock-esque commenting style which I limit to 80 characters in length:
+Use a docBlock-esque commenting style which I limit to 80 characters in length:
 
-    /**
-     * This is a docBlock style comment
-     *
-     * This is a longer description of the comment, describing the code in more
-     * detail. We limit these lines to a maximum of 80 characters in length.
-     *
-     * We can have markup in the comments, and are encouraged to do so:
-     *
-       <div class=foo>
-           <p>Lorem</p>
-       </div>
-     *
-     * We do not prefix lines of code with an asterisk as to do so would inhibit
-     * copy and paste.
-     */
+```
+/**
+ * This is a docBlock style comment
+ *
+ * This is a longer description of the comment, describing the code in more
+ * detail. We limit these lines to a maximum of 80 characters in length.
+ *
+ * We can have markup in the comments, and are encouraged to do so:
+ *
+   <div class=foo>
+       <p>Lorem</p>
+   </div>
+ *
+ * We do not prefix lines of code with an asterisk as to do so would inhibit
+ * copy and paste.
+ */
+```
 
 You should document and comment our code as much as you possibly can, what may
 seem or feel transparent and self explanatory to you may not be to another dev.
@@ -375,16 +382,20 @@ tell.
 By quasi-qualifying this selector (i.e. commenting out the leading type
 selector) we can communicate where we wish to have this class applied, thus:
 
-    /*html*/.product-page{}
+```css
+/*html*/.product-page {}
+```
 
 We can now see exactly where to apply this class but with none of the
 specificity or non-reusability drawbacks.
 
 Other examples might be:
 
-    /*ol*/.breadcrumb{}
-    /*p*/.intro{}
-    /*ul*/.image-thumbs{}
+```css
+/*ol*/.breadcrumb {}
+/*p*/.intro {}
+/*ul*/.image-thumbs {}
+```
 
 Here we can see where we intend each of these classes to be applied without
 actually ever impacting the specificity of the selectors.
@@ -394,15 +405,17 @@ actually ever impacting the specificity of the selectors.
 If you write a new component then leave some tags pertaining to its function in
 a comment above it, for example:
 
-    /**
-     * ^navigation ^lists
-     */
-    .nav{}
+```css
+/**
+ * ^navigation ^lists
+ */
+.nav {}
 
-    /**
-     * ^grids ^lists ^tables
-     */
-    .matrix{}
+/**
+ * ^grids ^lists ^tables
+ */
+.matrix {}
+```
 
 These tags allow other developers to find snippets of code by searching for
 function; if a developer needs to work with lists they can run a find for
@@ -419,17 +432,21 @@ which work thus:
 
 In your base stylesheet:
 
-    /**
-     * Extend `.foo` in theme.css
-     */
-     .foo{}
+```css
+/**
+ * Extend `.foo` in theme.css
+ */
+.foo {}
+```
 
 In your theme stylesheet:
 
-    /**
-     * Extends `.foo` in base.css
-     */
-     .bar{}
+```css
+/**
+ * Extends `.foo` in base.css
+ */
+.bar {}
+```
 
 Here we have established a concrete relationship between two very separate
 pieces of code.
@@ -456,11 +473,13 @@ apply only the relevant classes and CSS _afterwards_.
 I work in an OOCSS manner; I split components into structure (objects) and
 skin (extensions). As an **analogy** (note, not example) take the following:
 
-    .room{}
+```css
+.room {}
 
-    .room--kitchen{}
-    .room--bedroom{}
-    .room--bathroom{}
+.room--kitchen {}
+.room--bedroom {}
+.room--bathroom {}
+```
 
 We have several types of room in a house, but they all share similar traits;
 they all have floors, ceilings, walls and doors. We can share this information
@@ -516,10 +535,12 @@ benefits of ems with the confidence of pixels. Here is a handy Sass mixin to
 work out a rem and pixel fallback for you (assuming you set your base font
 size in a variable somewhere):
 
-    @mixin font-size($font-size){
-        font-size:$font-size +px;
-        font-size:$font-size / $base-font-size +rem;
-    }
+```scss
+@mixin font-size($font-size) {
+  font-size: $font-size +px;
+  font-size: $font-size / $base-font-size +rem;
+}
+```
 
 I only use pixels for items whose dimensions were defined before the came into
 the site. This includes things like images and sprites whose dimensions are
@@ -708,26 +729,32 @@ Sass is my preprocessor of choice. **Use it wisely.** Use Sass to make your CSS
 more powerful but avoid nesting like the plague! Nest only when it would
 actually be necessary in vanilla CSS, e.g.
 
-    .header{}
-    .header .site-nav{}
-    .header .site-nav li{}
-    .header .site-nav li a{}
+```css
+.header {}
+.header .site-nav {}
+.header .site-nav li {}
+.header .site-nav li a {}
+```
 
 Would be wholly unnecessary in normal CSS, so the following would be **bad**
 Sass:
 
-    .header{
-        .site-nav{
-            li{
-                a{}
-            }
-        }
+```css
+.header {
+  .site-nav {
+    li {
+      a {}
     }
+  }
+}
+```
 
 If you were to Sass this up you’d write it as:
 
-    .header{}
-    .site-nav{
-        li{}
-        a{}
-    }
+```scss
+.header {}
+.site-nav {
+  li {}
+  a{}
+}
+```
